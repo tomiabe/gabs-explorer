@@ -47,7 +47,7 @@
       "<div class=\"place-image\"><img src=\"" + escapeHtml(place.image) + "\" alt=\"" + escapeHtml(place.name) + " in " + escapeHtml(place.area) + "\" loading=\"lazy\" />" +
       "<span class=\"place-type\"><i class=\"ph ph-" + iconForCategory(place.category) + "\" aria-hidden=\"true\"></i> " + escapeHtml(place.type) + "</span>" +
       "<button class=\"save-button" + (saved ? " is-saved" : "") + "\" type=\"button\" data-save=\"" + escapeHtml(place.id) + "\" aria-label=\"" + (saved ? "Remove " : "Save ") + escapeHtml(place.name) + "\" aria-pressed=\"" + saved + "\"><i class=\"ph ph-bookmark-simple" + (saved ? "-fill" : "") + "\" aria-hidden=\"true\"></i></button></div>" +
-      "<div class=\"place-body\"><div class=\"place-heading-row\"><h3>" + escapeHtml(place.name) + "</h3></div><p class=\"place-location\"><i class=\"ph ph-map-pin\" aria-hidden=\"true\"></i> " + escapeHtml(place.area) + "</p><p class=\"place-description\">" + escapeHtml(place.description) + "</p><div class=\"place-tags\">" + place.tags.map(function (tag) { return "<span class=\"place-tag\">" + escapeHtml(tag) + "</span>"; }).join("") + "</div><div class=\"place-action\"><span class=\"place-fit\">" + escapeHtml(place.fit) + "</span><a class=\"place-link\" href=\"place.html?place=" + encodeURIComponent(place.id) + "\">View place <i class=\"ph ph-arrow-up-right\" aria-hidden=\"true\"></i></a></div></div></article>";
+      "<div class=\"place-body\"><div class=\"place-heading-row\"><h3>" + escapeHtml(place.name) + "</h3></div><p class=\"place-location\"><i class=\"ph ph-map-pin\" aria-hidden=\"true\"></i> " + escapeHtml(place.area) + "</p><p class=\"place-description\">" + escapeHtml(place.description) + "</p><div class=\"place-tags\">" + place.tags.map(function (tag) { return "<span class=\"place-tag\">" + escapeHtml(tag) + "</span>"; }).join("") + "</div><div class=\"place-action\"><span class=\"place-fit\">" + escapeHtml(place.fit) + "</span><a class=\"place-link\" href=\"place.html?place=" + encodeURIComponent(place.id) + "\" aria-label=\"Open guide for " + escapeHtml(place.name) + "\">Open guide <i class=\"ph ph-arrow-up-right\" aria-hidden=\"true\"></i></a></div></div></article>";
   }
 
   function bindSaveButtons(scope) {
@@ -90,12 +90,10 @@
 
   var menuToggle = document.querySelector(".menu-toggle");
   var mobileNav = document.getElementById("mobile-nav");
-  var menuClose = mobileNav.querySelector(".mobile-nav-close");
   function closeMobileMenu(returnFocus) { menuToggle.setAttribute("aria-expanded", "false"); menuToggle.innerHTML = "<i class=\"ph ph-list\" aria-hidden=\"true\"></i>"; mobileNav.hidden = true; if (returnFocus) menuToggle.focus(); }
-  function openMobileMenu() { menuToggle.setAttribute("aria-expanded", "true"); menuToggle.innerHTML = "<i class=\"ph ph-x\" aria-hidden=\"true\"></i>"; mobileNav.hidden = false; menuClose.focus(); }
+  function openMobileMenu() { menuToggle.setAttribute("aria-expanded", "true"); menuToggle.innerHTML = "<i class=\"ph ph-x\" aria-hidden=\"true\"></i>"; mobileNav.hidden = false; mobileNav.querySelector("a").focus(); }
   menuToggle.addEventListener("click", function () { if (menuToggle.getAttribute("aria-expanded") === "true") closeMobileMenu(false); else openMobileMenu(); });
   mobileNav.querySelectorAll("a").forEach(function (link) { link.addEventListener("click", function () { closeMobileMenu(false); }); });
-  menuClose.addEventListener("click", function () { closeMobileMenu(true); });
-  mobileNav.addEventListener("keydown", function (event) { if (event.key === "Escape") { closeMobileMenu(true); return; } if (event.key !== "Tab") return; var focusable = Array.prototype.slice.call(mobileNav.querySelectorAll("button:not([disabled]), a[href]")); var first = focusable[0]; var last = focusable[focusable.length - 1]; if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); } else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); } });
+  mobileNav.addEventListener("keydown", function (event) { if (event.key === "Escape") { closeMobileMenu(true); return; } if (event.key !== "Tab") return; var focusable = Array.prototype.slice.call(mobileNav.querySelectorAll("a[href]")); var first = focusable[0]; var last = focusable[focusable.length - 1]; if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); } else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); } });
   render();
 })();

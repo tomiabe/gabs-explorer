@@ -112,7 +112,7 @@
         "<p class=\"place-location\"><i class=\"ph ph-map-pin\" aria-hidden=\"true\"></i> " + escapeHtml(place.area) + "</p>" +
         "<p class=\"place-description\">" + escapeHtml(place.description) + "</p>" +
         "<div class=\"place-tags\">" + place.tags.map(function (tag) { return "<span class=\"place-tag\">" + escapeHtml(tag) + "</span>"; }).join("") + "</div>" +
-        "<div class=\"place-action\"><span class=\"place-fit\">" + escapeHtml(place.fit) + "</span><a class=\"place-link\" href=\"place.html?place=" + encodeURIComponent(place.id) + "\">View place <i class=\"ph ph-arrow-up-right\" aria-hidden=\"true\"></i></a></div>" +
+        "<div class=\"place-action\"><span class=\"place-fit\">" + escapeHtml(place.fit) + "</span><a class=\"place-link\" href=\"place.html?place=" + encodeURIComponent(place.id) + "\" aria-label=\"Open guide for " + escapeHtml(place.name) + "\">Open guide <i class=\"ph ph-arrow-up-right\" aria-hidden=\"true\"></i></a></div>" +
       "</div>" +
     "</article>";
   }
@@ -298,7 +298,6 @@
 
   var menuToggle = document.querySelector(".menu-toggle");
   var mobileNav = document.getElementById("mobile-nav");
-  var menuClose = mobileNav.querySelector(".mobile-nav-close");
   function closeMobileMenu(returnFocus) {
     menuToggle.setAttribute("aria-expanded", "false");
     menuToggle.innerHTML = "<i class=\"ph ph-list\" aria-hidden=\"true\"></i>";
@@ -309,7 +308,7 @@
     menuToggle.setAttribute("aria-expanded", "true");
     menuToggle.innerHTML = "<i class=\"ph ph-x\" aria-hidden=\"true\"></i>";
     mobileNav.hidden = false;
-    menuClose.focus();
+    mobileNav.querySelector("a").focus();
   }
   menuToggle.addEventListener("click", function () {
     var isOpen = menuToggle.getAttribute("aria-expanded") === "true";
@@ -323,17 +322,13 @@
     });
   });
 
-  menuClose.addEventListener("click", function () {
-    closeMobileMenu(true);
-  });
-
   mobileNav.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
       closeMobileMenu(true);
       return;
     }
     if (event.key !== "Tab") return;
-    var focusable = Array.prototype.slice.call(mobileNav.querySelectorAll("button:not([disabled]), a[href]"));
+    var focusable = Array.prototype.slice.call(mobileNav.querySelectorAll("a[href]"));
     var first = focusable[0];
     var last = focusable[focusable.length - 1];
     if (event.shiftKey && document.activeElement === first) {
