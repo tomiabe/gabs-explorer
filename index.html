@@ -77,25 +77,34 @@
 
           <div class="hero-stage" aria-label="A sample Gaborone day">
             <div class="hero-route-card">
-              <h2>A slower Saturday in Gaborone</h2>
-              <div class="route-list">
-                <div class="route-stop">
-                  <span class="route-time">10:30</span>
-                  <span class="route-line"></span>
-                  <span><strong>Kgale Hill</strong><small>Walk, climb, take the long view</small></span>
-                </div>
-                <div class="route-stop">
-                  <span class="route-time">13:00</span>
-                  <span class="route-line"></span>
-                  <span><strong>Lunch nearby</strong><small>Shortlist a table that fits the mood</small></span>
-                </div>
-                <div class="route-stop">
-                  <span class="route-time">17:00</span>
-                  <span class="route-line"></span>
-                  <span><strong>Gaborone Dam</strong><small>Stay for the light</small></span>
+              <div class="route-card-content" id="hero-route-content">
+                <h2>A slower Saturday in Gaborone</h2>
+                <div class="route-list">
+                  <div class="route-stop">
+                    <span class="route-time">10:30</span>
+                    <span class="route-line"></span>
+                    <span><strong>Kgale Hill</strong><small>Walk, climb, take the long view</small></span>
+                  </div>
+                  <div class="route-stop">
+                    <span class="route-time">13:00</span>
+                    <span class="route-line"></span>
+                    <span><strong>Lunch nearby</strong><small>Shortlist a table that fits the mood</small></span>
+                  </div>
+                  <div class="route-stop">
+                    <span class="route-time">17:00</span>
+                    <span class="route-line"></span>
+                    <span><strong>Gaborone Dam</strong><small>Stay for the light</small></span>
+                  </div>
                 </div>
               </div>
-              <button class="text-button" type="button" data-scroll="#collections">See the route idea <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+              <div class="route-card-footer">
+                <a class="text-button" href="explore.html">See places <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+                <div class="route-cycle-controls" aria-label="Choose a day idea">
+                  <button class="route-cycle-button" type="button" data-route-previous aria-label="Show the previous day idea"><i class="ph ph-arrow-left" aria-hidden="true"></i></button>
+                  <span id="route-cycle-count" aria-live="off">1 / 4</span>
+                  <button class="route-cycle-button" type="button" data-route-next aria-label="Show the next day idea"><i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

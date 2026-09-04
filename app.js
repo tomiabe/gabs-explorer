@@ -2,6 +2,40 @@
   "use strict";
 
   var places = window.GABS_PLACES || [];
+  var heroRoutes = [
+    {
+      title: "A slower Saturday in Gaborone",
+      stops: [
+        ["10:30", "Kgale Hill", "Walk, climb, take the long view"],
+        ["13:00", "Lunch nearby", "Shortlist a table that fits the mood"],
+        ["17:00", "Gaborone Dam", "Stay for the light"]
+      ]
+    },
+    {
+      title: "A first day in Gabs",
+      stops: [
+        ["10:00", "Main Mall", "Start in the middle and get your bearings"],
+        ["13:00", "Botswana Craft", "See local work and stay for lunch"],
+        ["18:30", "Two Six Seven", "Let dinner take its time"]
+      ]
+    },
+    {
+      title: "A Sunday with fresh air",
+      stops: [
+        ["09:30", "Mokolodi", "Trade the city for a wider view"],
+        ["13:00", "Bush Kitchen", "Make lunch the destination"],
+        ["17:15", "Gaborone Dam", "Come back for the evening light"]
+      ]
+    },
+    {
+      title: "An after work reset",
+      stops: [
+        ["17:30", "Main Mall", "Meet somewhere easy to find"],
+        ["19:00", "Two Six Seven", "Settle in for dinner and drinks"],
+        ["Later", "Your call", "Keep the plan open if the night has more in it"]
+      ]
+    }
+  ];
 
   var state = {
     filter: "all",
@@ -20,6 +54,11 @@
   var sortButton = document.getElementById("sort-button");
   var toast = document.getElementById("toast");
   var toastTimer;
+  var routeIndex = 0;
+  var routeTimer;
+  var routeContent = document.getElementById("hero-route-content");
+  var routeCard = document.querySelector(".hero-route-card");
+  var routeCount = document.getElementById("route-cycle-count");
 
   function loadSaved() {
     try {
@@ -129,6 +168,38 @@
     toastTimer = window.setTimeout(function () { toast.classList.remove("is-visible"); }, 2600);
   }
 
+  function routeMarkup(route) {
+    return "<h2>" + escapeHtml(route.title) + "</h2><div class=\"route-list\">" + route.stops.map(function (stop) {
+      return "<div class=\"route-stop\"><span class=\"route-time\">" + escapeHtml(stop[0]) + "</span><span class=\"route-line\"></span><span><strong>" + escapeHtml(stop[1]) + "</strong><small>" + escapeHtml(stop[2]) + "</small></span></div>";
+    }).join("") + "</div>";
+  }
+
+  function updateRoute(nextIndex, animate) {
+    routeIndex = (nextIndex + heroRoutes.length) % heroRoutes.length;
+    if (!routeContent || !routeCount) return;
+    function paintRoute() {
+      routeContent.innerHTML = routeMarkup(heroRoutes[routeIndex]);
+      routeCount.textContent = (routeIndex + 1) + " / " + heroRoutes.length;
+      routeContent.classList.remove("is-changing");
+    }
+    if (animate) {
+      routeContent.classList.add("is-changing");
+      window.setTimeout(paintRoute, 180);
+    } else {
+      paintRoute();
+    }
+  }
+
+  function stopRouteCycle() {
+    window.clearInterval(routeTimer);
+  }
+
+  function startRouteCycle() {
+    if (!routeCard || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    stopRouteCycle();
+    routeTimer = window.setInterval(function () { updateRoute(routeIndex + 1, true); }, 4600);
+  }
+
   function setIntent(intent) {
     state.intent = intent;
     state.filter = "all";
@@ -200,6 +271,30 @@
   document.querySelectorAll("[data-toast]").forEach(function (button) {
     button.addEventListener("click", function () { showToast(button.getAttribute("data-toast")); });
   });
+
+  if (routeCard && routeContent && routeCount) {
+    routeCard.addEventListener("mouseenter", stopRouteCycle);
+    routeCard.addEventListener("mouseleave", startRouteCycle);
+    routeCard.addEventListener("focusin", stopRouteCycle);
+    routeCard.addEventListener("focusout", function (event) {
+      if (!routeCard.contains(event.relatedTarget)) startRouteCycle();
+    });
+    document.querySelector("[data-route-previous]").addEventListener("click", function () {
+      stopRouteCycle();
+      updateRoute(routeIndex - 1, true);
+      startRouteCycle();
+    });
+    document.querySelector("[data-route-next]").addEventListener("click", function () {
+      stopRouteCycle();
+      updateRoute(routeIndex + 1, true);
+      startRouteCycle();
+    });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stopRouteCycle();
+      else startRouteCycle();
+    });
+    startRouteCycle();
+  }
 
   var menuToggle = document.querySelector(".menu-toggle");
   var mobileNav = document.getElementById("mobile-nav");
