@@ -298,26 +298,51 @@
 
   var menuToggle = document.querySelector(".menu-toggle");
   var mobileNav = document.getElementById("mobile-nav");
+  var menuClose = mobileNav.querySelector(".mobile-nav-close");
+  function closeMobileMenu(returnFocus) {
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.innerHTML = "<i class=\"ph ph-list\" aria-hidden=\"true\"></i>";
+    mobileNav.hidden = true;
+    if (returnFocus) menuToggle.focus();
+  }
+  function openMobileMenu() {
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.innerHTML = "<i class=\"ph ph-x\" aria-hidden=\"true\"></i>";
+    mobileNav.hidden = false;
+    menuClose.focus();
+  }
   menuToggle.addEventListener("click", function () {
     var isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-    menuToggle.setAttribute("aria-expanded", String(!isOpen));
-    menuToggle.innerHTML = isOpen ? "<i class=\"ph ph-list\" aria-hidden=\"true\"></i>" : "<i class=\"ph ph-x\" aria-hidden=\"true\"></i>";
-    mobileNav.hidden = isOpen;
+    if (isOpen) closeMobileMenu(false);
+    else openMobileMenu();
   });
 
   mobileNav.querySelectorAll("a").forEach(function (link) {
     link.addEventListener("click", function () {
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.innerHTML = "<i class=\"ph ph-list\" aria-hidden=\"true\"></i>";
-      mobileNav.hidden = true;
+      closeMobileMenu(false);
     });
   });
 
-  document.querySelector(".mobile-nav-close").addEventListener("click", function () {
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.innerHTML = "<i class=\"ph ph-list\" aria-hidden=\"true\"></i>";
-    mobileNav.hidden = true;
-    menuToggle.focus();
+  menuClose.addEventListener("click", function () {
+    closeMobileMenu(true);
+  });
+
+  mobileNav.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeMobileMenu(true);
+      return;
+    }
+    if (event.key !== "Tab") return;
+    var focusable = Array.prototype.slice.call(mobileNav.querySelectorAll("button:not([disabled]), a[href]"));
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
   renderPlaces();
