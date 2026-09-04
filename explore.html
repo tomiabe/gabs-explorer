@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2a2522" />
+    <meta name="description" content="Explore Gaborone by mood, area, and the kind of day you want to have." />
+    <title>Explore Gaborone | Gaborone Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://file.squarespace-cdn.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="explore-page-body">
+    <a class="skip-link" href="#explore-main">Skip to places</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Gaborone Explorer home">
+          <img class="brand-logo" src="https://images.squarespace-cdn.com/content/v1/69b45542bd0c603556c11416/c915f95e-9434-4627-9876-d0a8420d283a/GABORONE+EXPLORER+NEW.png?format=500w" alt="Gaborone Explorer" />
+        </a>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link is-active" href="explore.html">Explore</a>
+          <a class="nav-link" href="index.html#weekend">This weekend</a>
+          <a class="nav-link" href="index.html#collections">Collections</a>
+        </nav>
+        <div class="header-actions">
+          <a class="saved-link" href="#saved" aria-label="Saved places">
+            <i class="ph ph-bookmark-simple" aria-hidden="true"></i>
+            <span>Saved</span><span class="saved-count" id="saved-count" hidden>0</span>
+          </a>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><i class="ph ph-list" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <nav class="mobile-nav container" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <button class="mobile-nav-close" type="button" aria-label="Close menu"><i class="ph ph-x" aria-hidden="true"></i></button>
+        <a href="index.html">Home</a><a href="explore.html">Explore</a><a href="index.html#weekend">This weekend</a><a href="index.html#collections">Collections</a><a href="#saved">Saved places</a>
+      </nav>
+    </header>
+
+    <main id="explore-main">
+      <section class="explore-intro">
+        <div class="container">
+          <a class="back-link" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to home</a>
+          <h1>Good places, sorted for real life.</h1>
+          <p>Choose a mood, a part of town, or simply the kind of time you have. The point is to find a good next move.</p>
+        </div>
+      </section>
+
+      <section class="container explore-workspace" aria-label="Explore places">
+        <aside class="explore-controls" aria-label="Refine your search">
+          <div class="control-heading"><h2>Make it specific</h2><button class="text-button" id="explore-reset" type="button">Reset</button></div>
+          <label for="explore-query">Search</label>
+          <div class="control-search"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input id="explore-query" type="search" placeholder="Place, area, or occasion" autocomplete="off" /></div>
+          <label for="explore-category">Kind of place</label>
+          <select id="explore-category"><option value="all">Everything</option><option value="Eat and drink">Eat and drink</option><option value="Outdoors">Outdoors</option><option value="Culture">Culture</option><option value="Shopping">Shopping</option></select>
+          <label for="explore-area">Area</label>
+          <select id="explore-area"><option value="all">Anywhere in Gabs</option><option value="South Gaborone">South Gaborone</option><option value="Village">Village</option><option value="Mokolodi">Mokolodi</option><option value="Block 3">Block 3</option><option value="Central Gaborone">Central Gaborone</option></select>
+          <fieldset class="moment-fieldset"><legend>What is the plan?</legend><div class="moment-chips" id="moment-chips"></div></fieldset>
+          <p class="control-note"><i class="ph ph-info" aria-hidden="true"></i> A useful guide is honest about what it knows. Check practical details with the place before you go.</p>
+        </aside>
+
+        <div class="explore-results">
+          <div class="explore-results-head"><div><h2 id="explore-results-title">Find your next move</h2><p id="explore-summary" aria-live="polite">Showing places</p></div><button class="sort-button" id="explore-sort" type="button" aria-pressed="false"><i class="ph ph-arrows-down-up" aria-hidden="true"></i> Curated order</button></div>
+          <div class="explore-place-grid" id="explore-place-grid"></div>
+        </div>
+      </section>
+
+      <section class="saved-section container" id="saved" aria-labelledby="saved-title">
+        <div class="section-heading"><div><h2 id="saved-title">Your places, for later.</h2><p>Save a good idea before it disappears into the scroll.</p></div><span class="section-mark" aria-hidden="true">03</span></div>
+        <div class="saved-empty" id="saved-empty"><i class="ph ph-bookmark-simple" aria-hidden="true"></i><p>You have not saved a place yet.</p></div>
+        <div class="place-grid saved-grid" id="saved-grid" hidden></div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-top"><div class="footer-brand"><img class="brand-logo brand-logo-footer" src="https://images.squarespace-cdn.com/content/v1/69b45542bd0c603556c11416/c915f95e-9434-4627-9876-d0a8420d283a/GABORONE+EXPLORER+NEW.png?format=500w" alt="Gaborone Explorer" /><p>Where Gabs goes next.</p></div><div class="footer-note"><p>The editorial voice stays. The next step is helping people choose.</p><a href="mailto:hello@gaboroneexplorer.com">Say hello <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></div></div><div class="container footer-bottom"><span>Gaborone, Botswana</span><span>Prices and hours change. Check with the venue before you go.</span></div></footer>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="data.js"></script><script src="explore.js"></script>
+  </body>
+</html>

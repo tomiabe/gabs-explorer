@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A prototype discovery layer for finding places, experiences, and events across Greater Gaborone." />
+    <meta name="theme-color" content="#2a2522" />
+    <title>Gaborone Explorer | Find your kind of Gabs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://file.squarespace-cdn.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Gaborone Explorer home">
+          <img class="brand-logo" src="https://images.squarespace-cdn.com/content/v1/69b45542bd0c603556c11416/c915f95e-9434-4627-9876-d0a8420d283a/GABORONE+EXPLORER+NEW.png?format=500w" alt="Gaborone Explorer" />
+        </a>
+
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <a class="nav-link is-active" href="#top">Home</a>
+          <a class="nav-link" href="explore.html">Explore</a>
+          <a class="nav-link" href="#weekend">This weekend</a>
+          <a class="nav-link" href="#collections">Collections</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="saved-link" href="#saved" aria-label="Saved places">
+            <i class="ph ph-bookmark-simple" aria-hidden="true"></i>
+            <span>Saved</span>
+            <span class="saved-count" id="saved-count" hidden>0</span>
+          </a>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+            <i class="ph ph-list" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <nav class="mobile-nav container" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <button class="mobile-nav-close" type="button" aria-label="Close menu"><i class="ph ph-x" aria-hidden="true"></i></button>
+        <a href="#top">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="#weekend">This weekend</a>
+        <a href="#collections">Collections</a>
+        <a href="#saved">Saved places</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-inner container">
+          <div class="hero-copy">
+            <h1 id="hero-title">Find your kind of Gabs.</h1>
+            <p class="hero-description">Places with a point of view. Experiences worth the drive. Local knowledge that helps you decide what to do next.</p>
+
+            <form class="hero-search" id="hero-search" role="search">
+              <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+              <label class="sr-only" for="hero-query">Search places, areas, or occasions</label>
+              <input id="hero-query" name="query" type="search" placeholder="Search a place, area, or occasion" autocomplete="off" />
+              <button class="icon-button icon-button-light" type="submit" aria-label="Search">
+                <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </button>
+            </form>
+
+            <div class="quick-actions" aria-label="Quick searches">
+              <button class="quick-action" type="button" data-intent="Tonight"><i class="ph ph-moon-stars" aria-hidden="true"></i> Tonight</button>
+              <button class="quick-action" type="button" data-intent="Weekend"><i class="ph ph-calendar-blank" aria-hidden="true"></i> This weekend</button>
+              <button class="quick-action" type="button" data-intent="Outdoors"><i class="ph ph-sun" aria-hidden="true"></i> Outside</button>
+              <button class="quick-action" type="button" data-intent="Local food"><i class="ph ph-fork-knife" aria-hidden="true"></i> Local food</button>
+            </div>
+          </div>
+
+          <div class="hero-stage" aria-label="A sample Gaborone day">
+            <div class="hero-route-card">
+              <h2>A slower Saturday in Gaborone</h2>
+              <div class="route-list">
+                <div class="route-stop">
+                  <span class="route-time">10:30</span>
+                  <span class="route-line"></span>
+                  <span><strong>Kgale Hill</strong><small>Walk, climb, take the long view</small></span>
+                </div>
+                <div class="route-stop">
+                  <span class="route-time">13:00</span>
+                  <span class="route-line"></span>
+                  <span><strong>Lunch nearby</strong><small>Shortlist a table that fits the mood</small></span>
+                </div>
+                <div class="route-stop">
+                  <span class="route-time">17:00</span>
+                  <span class="route-line"></span>
+                  <span><strong>Gaborone Dam</strong><small>Stay for the light</small></span>
+                </div>
+              </div>
+              <button class="text-button" type="button" data-scroll="#collections">See the route idea <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mood-section container section-space" aria-labelledby="mood-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="mood-title">What are you in the mood for?</h2>
+            <p>Start with the moment. We will help with the place.</p>
+          </div>
+          <span class="section-mark" aria-hidden="true">01</span>
+        </div>
+
+        <div class="mood-grid">
+          <button class="mood-card mood-card-red" type="button" data-intent="Date night">
+            <i class="ph ph-heart-straight" aria-hidden="true"></i>
+            <span><strong>Date night</strong><small>Good light, easy conversation</small></span>
+            <i class="ph ph-arrow-up-right mood-arrow" aria-hidden="true"></i>
+          </button>
+          <button class="mood-card" type="button" data-intent="Slow morning">
+            <i class="ph ph-coffee" aria-hidden="true"></i>
+            <span><strong>Slow morning</strong><small>Coffee, brunch, no rush</small></span>
+            <i class="ph ph-arrow-up-right mood-arrow" aria-hidden="true"></i>
+          </button>
+          <button class="mood-card" type="button" data-intent="Family day">
+            <i class="ph ph-users-three" aria-hidden="true"></i>
+            <span><strong>Family day</strong><small>Room to move and stay awhile</small></span>
+            <i class="ph ph-arrow-up-right mood-arrow" aria-hidden="true"></i>
+          </button>
+          <button class="mood-card" type="button" data-intent="Culture">
+            <i class="ph ph-mask-happy" aria-hidden="true"></i>
+            <span><strong>Culture and history</strong><small>See a different side of the city</small></span>
+            <i class="ph ph-arrow-up-right mood-arrow" aria-hidden="true"></i>
+          </button>
+          <button class="mood-card" type="button" data-intent="Outdoor escape">
+            <i class="ph ph-mountains" aria-hidden="true"></i>
+            <span><strong>Outdoor escape</strong><small>Fresh air without going far</small></span>
+            <i class="ph ph-arrow-up-right mood-arrow" aria-hidden="true"></i>
+          </button>
+          <button class="mood-card" type="button" data-intent="Night out">
+            <i class="ph ph-speaker-high" aria-hidden="true"></i>
+            <span><strong>Night out</strong><small>Music, drinks, a reason to dress up</small></span>
+            <i class="ph ph-arrow-up-right mood-arrow" aria-hidden="true"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="explore-section container section-space" id="explore" aria-labelledby="explore-title">
+        <div class="section-heading section-heading-tight">
+          <div>
+            <h2 id="explore-title">Good places, sorted for real life.</h2>
+            <p>Curated for how Gabs actually moves.</p>
+          </div>
+          <button class="text-button" type="button" data-clear-filters hidden>Clear filters <i class="ph ph-x" aria-hidden="true"></i></button>
+        </div>
+
+        <div class="filter-bar" role="toolbar" aria-label="Filter places">
+          <button class="filter-button is-active" type="button" data-filter="all">All places</button>
+          <button class="filter-button" type="button" data-filter="Eat and drink"><i class="ph ph-fork-knife" aria-hidden="true"></i> Eat and drink</button>
+          <button class="filter-button" type="button" data-filter="Outdoors"><i class="ph ph-leaf" aria-hidden="true"></i> Outdoors</button>
+          <button class="filter-button" type="button" data-filter="Culture"><i class="ph ph-buildings" aria-hidden="true"></i> Culture</button>
+          <button class="filter-button" type="button" data-filter="Shopping"><i class="ph ph-shopping-bag-open" aria-hidden="true"></i> Shopping</button>
+        </div>
+
+        <div class="results-meta">
+          <p id="results-summary" aria-live="polite">Showing 6 places</p>
+          <button class="sort-button" type="button" id="sort-button" aria-pressed="false"><i class="ph ph-arrows-down-up" aria-hidden="true"></i> Curated order</button>
+        </div>
+
+        <div class="place-grid" id="place-grid"></div>
+      </section>
+
+      <section class="split-section container section-space" id="weekend" aria-labelledby="weekend-title">
+        <div class="split-copy">
+          <span class="number-block" aria-hidden="true">02</span>
+          <h2 id="weekend-title">The city has a pulse. Catch it.</h2>
+          <p>From a morning climb to an evening set, find the things that make a week feel less like a week.</p>
+          <button class="primary-button" type="button" data-toast="The live calendar is part of the next layer.">Explore this weekend <i class="ph ph-arrow-up-right" aria-hidden="true"></i></button>
+        </div>
+        <div class="event-board" aria-label="Sample event listings">
+          <div class="event-board-header"><span>Coming up</span><i class="ph ph-calendar-blank" aria-hidden="true"></i></div>
+          <article class="event-row">
+            <div class="event-date"><strong>FRI</strong><span>18:30</span></div>
+            <div class="event-info"><h3>Live music after work</h3><p>Gaborone CBD · Music and food</p></div>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </article>
+          <article class="event-row">
+            <div class="event-date"><strong>SAT</strong><span>10:00</span></div>
+            <div class="event-info"><h3>Market morning</h3><p>Local makers · Crafts and coffee</p></div>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </article>
+          <article class="event-row">
+            <div class="event-date"><strong>SUN</strong><span>16:45</span></div>
+            <div class="event-info"><h3>Sunset outside</h3><p>Greater Gaborone · Open air</p></div>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </article>
+          <p class="event-note"><i class="ph ph-info" aria-hidden="true"></i> Event details should always show when they were last confirmed.</p>
+        </div>
+      </section>
+
+      <section class="collections-section container section-space" id="collections" aria-labelledby="collections-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="collections-title">Shortlists worth sharing.</h2>
+            <p>Not everything needs a top ten. Sometimes you just need a good next move.</p>
+          </div>
+          <span class="section-mark" aria-hidden="true">03</span>
+        </div>
+
+        <div class="collection-grid">
+          <button class="collection-card collection-card-red" type="button" data-intent="First time in Gabs">
+            <span class="collection-icon"><i class="ph ph-compass" aria-hidden="true"></i></span>
+            <span><strong>First time in Gabs</strong><small>A gentle introduction to the city</small></span>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </button>
+          <button class="collection-card" type="button" data-intent="Under P300">
+            <span class="collection-icon"><i class="ph ph-wallet" aria-hidden="true"></i></span>
+            <span><strong>Good days under P300</strong><small>Good food and room to breathe</small></span>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </button>
+          <button class="collection-card" type="button" data-intent="Worth the drive">
+            <span class="collection-icon"><i class="ph ph-car" aria-hidden="true"></i></span>
+            <span><strong>Worth the drive</strong><small>Places that make the extra minutes count</small></span>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </button>
+          <button class="collection-card" type="button" data-intent="Quiet places">
+            <span class="collection-icon"><i class="ph ph-chat-circle" aria-hidden="true"></i></span>
+            <span><strong>Quiet enough to talk</strong><small>For when the conversation matters</small></span>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="trust-section container section-space" aria-labelledby="trust-title">
+        <div class="trust-panel">
+          <div class="trust-symbol"><i class="ph ph-seal-check" aria-hidden="true"></i></div>
+          <div>
+            <h2 id="trust-title">Local judgment, made useful.</h2>
+            <p>Every place should tell you why it belongs here, what it is good for, and when the information was last checked.</p>
+          </div>
+          <div class="trust-points">
+            <span><i class="ph ph-check-circle" aria-hidden="true"></i> Researched, not scraped</span>
+            <span><i class="ph ph-check-circle" aria-hidden="true"></i> Paid visibility stays labelled</span>
+            <span><i class="ph ph-check-circle" aria-hidden="true"></i> Built for local context</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="saved-section container section-space" id="saved" aria-labelledby="saved-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="saved-title">Your places, for later.</h2>
+            <p>Save a good idea before it disappears into the scroll.</p>
+          </div>
+          <span class="section-mark" aria-hidden="true"><i class="ph ph-bookmark-simple" aria-hidden="true"></i></span>
+        </div>
+        <div class="saved-empty" id="saved-empty">
+          <i class="ph ph-bookmark-simple" aria-hidden="true"></i>
+          <p>You have not saved a place yet.</p>
+          <button class="text-button" type="button" data-scroll="#explore">Find somewhere good <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+        </div>
+        <div class="place-grid saved-grid" id="saved-grid" hidden></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-top">
+        <div class="footer-brand">
+          <img class="brand-logo brand-logo-footer" src="https://images.squarespace-cdn.com/content/v1/69b45542bd0c603556c11416/c915f95e-9434-4627-9876-d0a8420d283a/GABORONE+EXPLORER+NEW.png?format=500w" alt="Gaborone Explorer" />
+          <p>Where Gabs goes next.</p>
+        </div>
+        <div class="footer-note">
+          <p>Prototype direction for a more useful city guide. The editorial voice stays. The next step is helping people choose.</p>
+          <a href="mailto:hello@gaboroneexplorer.com">Say hello <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>Gaborone, Botswana</span>
+        <span>Prices and hours change. Check with the venue before you go.</span>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
